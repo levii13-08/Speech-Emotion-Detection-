@@ -1,15 +1,48 @@
-UPDATES:
-03/03/22 -  reduce_noise inputs have been corrected 
-            QA printing added due to np.pad issues: filename, length, & dBFS when needed.
+Project Overview:
 
-# Speech Emotion Recognition (SER) in real-time
-A Deep Learning (LSTM) model with keras.
+This project implements a Speech Emotion Detection system that classifies human emotions from speech audio using deep learning. The system analyzes audio signals and predicts the emotional state of a speaker.
 
-This study aims to investigate and implement an Artificial Intelligence (AI) algorithm that will analyze an audio file in real-time, identify and present the expressed emotion within it.
+The model is trained using two popular emotional speech datasets:
+RAVDESS (Ryerson Audio-Visual Database of Emotional Speech and Song)
+TESS (Toronto Emotional Speech Set)
+Due to their large size, the datasets are not included in this repository.
 
-A classification model is developed in a Deep Learning method, meaning a Deep Neural Network (DNN) while an advanced model for time-series analysis has been chosen, which is the Long Short-Term Memory (LSTM).
+Methodology
 
-For the train of the model, expressed emotions by actors have been used from The Ryerson Audio-Visual Database of Emotional Speech and Song (RAVDESS) from the Ryerson University, as well as the Toronto Emotional Speech Set (TESS) from the University of Toronto. 
+The project is divided into two main components:
+1. Model Training (1_model.ipynb)
+In this notebook we:
+Load and preprocess audio files from the RAVDESS and TESS datasets
+Perform noise reduction and audio normalization
+Extract important audio features (MFCCs) using Librosa
+Encode emotion labels for classification
+Train a deep learning model using stacked LSTM layers
+The LSTM (Long Short-Term Memory) network helps capture temporal patterns in speech signals, making it suitable for analyzing sequential audio data.
+The trained model weights and preprocessing components are saved for later use.
 
-Results had shown an accuracy of 87% of emotional recognition from speech.
-A real-time implementation of the model is executed, receiving microphone signal as input and analyzing it cyclicly, outputs the distribution of emotions expressed every time cycle. When recognizing silence of 2 seconds or more, the system autonomously stops.
+2. Real-Time Emotion Detection (2_realtime.ipynb)
+This notebook performs real-time speech emotion prediction by:
+Recording audio from the microphone using PyAudio
+Extracting the same MFCC features used during training
+Loading the trained LSTM model
+Predicting the emotion of the input speech
+This allows the system to detect emotions from live microphone input in real time.
+
+Technologies Used
+Python
+TensorFlow / Keras
+LSTM Neural Networks
+Librosa (audio feature extraction)
+NumPy & Scikit-learn
+PyAudio (real-time audio capture)
+Pydub & Noisereduce (audio preprocessing)
+Emotions Detected
+
+The model is trained to recognize emotions such as:
+Angry
+Happy
+Sad
+Fear
+Neutral
+Disgust
+Surprise
